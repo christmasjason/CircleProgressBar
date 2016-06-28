@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CircleProgressBar</string>
+    <string name="timeLeft">剩余\n%d</string>
+    <string name="timeElapse">进度\n%d</string>
+</resources>
