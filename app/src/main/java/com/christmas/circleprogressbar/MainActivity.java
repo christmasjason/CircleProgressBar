@@ -5,11 +5,12 @@ import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-  
+
   // 总共的时间是30s.
   public static final long MS_IN_FUTURE = DateUtils.MINUTE_IN_MILLIS / 2;
   public static final int MAX_PROGRESS = 100;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     objectAnimatorBottom = ObjectAnimator
         .ofInt(progressBarBottom, PROGRESS_PROPERTY, progressBarBottom.getMax())
         .setDuration(MS_IN_FUTURE);
+    objectAnimatorBottom.setInterpolator(new LinearInterpolator());
     objectAnimatorBottom.start();
   }
 
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     objectAnimatorMiddle = ObjectAnimator
         .ofInt(progressBarMiddle, PROGRESS_PROPERTY, progressBarMiddle.getMax())
         .setDuration(MS_IN_FUTURE);
+    objectAnimatorMiddle.setInterpolator(new LinearInterpolator());
     objectAnimatorMiddle
         .addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
           @Override
@@ -87,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
     objectAnimatorTop = ObjectAnimator
         .ofInt(progressBarTop, PROGRESS_PROPERTY, 0)
         .setDuration(MS_IN_FUTURE);
+    objectAnimatorTop.setInterpolator(new LinearInterpolator());
     objectAnimatorTop
         .addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
           @Override
