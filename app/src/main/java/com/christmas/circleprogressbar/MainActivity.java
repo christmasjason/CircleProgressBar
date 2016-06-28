@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+  
   // 总共的时间是30s.
   public static final long MS_IN_FUTURE = DateUtils.MINUTE_IN_MILLIS / 2;
   public static final int MAX_PROGRESS = 100;
