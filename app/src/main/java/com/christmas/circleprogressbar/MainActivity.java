@@ -21,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
   private TextView tvCountDownTop;
   private TextView tvCountDownMiddle;
 
+  private ObjectAnimator objectAnimatorTop;
+  private ObjectAnimator objectAnimatorMiddle;
+  private ObjectAnimator objectAnimatorBottom;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -50,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
     progressBarBottom.setMax(MAX_PROGRESS);
     progressBarBottom.setProgress(0);
 
-    ObjectAnimator
+    objectAnimatorBottom = ObjectAnimator
         .ofInt(progressBarBottom, PROGRESS_PROPERTY, progressBarBottom.getMax())
-        .setDuration(MS_IN_FUTURE)
-        .start();
+        .setDuration(MS_IN_FUTURE);
+    objectAnimatorBottom.start();
   }
 
   private void initMiddleProgressBar() {
@@ -61,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     progressBarMiddle.setMax(MAX_PROGRESS);
     progressBarMiddle.setProgress(0);
 
-    ObjectAnimator objectAnimatorMiddle = ObjectAnimator
+    objectAnimatorMiddle = ObjectAnimator
         .ofInt(progressBarMiddle, PROGRESS_PROPERTY, progressBarMiddle.getMax())
         .setDuration(MS_IN_FUTURE);
     objectAnimatorMiddle
@@ -79,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     progressBarTop.setMax(MAX_PROGRESS);
     progressBarTop.setProgress(MAX_PROGRESS);
 
-    ObjectAnimator objectAnimatorTop = ObjectAnimator
+    objectAnimatorTop = ObjectAnimator
         .ofInt(progressBarTop, PROGRESS_PROPERTY, 0)
         .setDuration(MS_IN_FUTURE);
     objectAnimatorTop
@@ -90,5 +94,22 @@ public class MainActivity extends AppCompatActivity {
           }
         });
     objectAnimatorTop.start();
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+
+    if (objectAnimatorTop != null && objectAnimatorTop.isRunning()) {
+      objectAnimatorTop.end();
+    }
+
+    if (objectAnimatorMiddle != null && objectAnimatorMiddle.isRunning()) {
+      objectAnimatorMiddle.end();
+    }
+
+    if (objectAnimatorBottom != null && objectAnimatorBottom.isRunning()) {
+      objectAnimatorBottom.end();
+    }
   }
 }
